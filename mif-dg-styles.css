@@ -1,0 +1,233 @@
+/* Оформление панели управления */
+
+.control-panel .settings {
+    display: none;
+}
+
+
+
+.control-panel .count {
+    font-size: 90%;
+    color: #fff;
+    background-color: #FFA829;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+}
+
+.control-panel .rating {
+    font-size: 90%;
+    background-color: #eee;
+    padding: 0rem 1rem;
+    border-radius: 2rem;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+}
+
+.control-panel .caption {
+    /* font-size: 90%; */
+    background-color: #eee;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    display: inline-block;
+}
+
+.control-panel .big-button {
+    
+    background-color: #eee;
+    padding: 0.5rem 1rem;
+    /* margin: 2rem 1rem 0 0; */
+    border-radius: 1rem;
+    display: inline-block;
+    
+}
+
+#refresh_rl, .nav-link, input[type="radio"] {
+    outline: none ! important;
+}
+
+#max_rating, #settings_save {
+    font-size: 100%;
+    line-height: 1.25
+}
+
+#settings_edit {
+    color: #FFA829;
+    /* text-decoration: underline; */
+    border-bottom: 1px dotted;
+}
+
+/* Оформление панели выставления рейтинга */
+
+
+.rating {
+    margin-bottom: 2rem;
+}
+
+.rating a {
+    text-decoration: none ! important;
+    border: 0 ! important;
+    outline: none ! important;
+}
+
+.rating .off {
+    color: rgba(51, 51, 51, 0.7);
+}
+
+.rating .on {
+    color: #FFA829;
+}
+
+.comment .result {
+    font-size: 90%;
+    font-weight: bold;
+    padding: 0.3rem 1rem;
+    margin: 0 1rem 0 3rem;
+    border-radius: 2rem;
+}
+
+.comment .timestamp {
+    font-size: 90%;
+    background-color: #eee;
+    padding: 0.3rem 1rem;
+    margin: 0 0 0 1rem;
+    border-radius: 2rem;
+}
+
+.comment .timestamp.norating {
+    color: #721c24;
+    background-color: #f8d7da;
+    margin: 0 1rem 0 3rem;
+}
+
+.comment .timestamp.free {
+    margin: 0;
+}
+
+.rating[data-select="1"] .off[data-point="1"], 
+.rating[data-select="2"] .off[data-point="1"], 
+.rating[data-select="2"] .off[data-point="2"], 
+.rating[data-select="3"] .off[data-point="1"], 
+.rating[data-select="3"] .off[data-point="2"], 
+.rating[data-select="3"] .off[data-point="3"], 
+.rating[data-select="4"] .off[data-point="1"], 
+.rating[data-select="4"] .off[data-point="2"], 
+.rating[data-select="4"] .off[data-point="3"], 
+.rating[data-select="4"] .off[data-point="4"], 
+.rating[data-select="5"] .off[data-point="1"], 
+.rating[data-select="5"] .off[data-point="2"], 
+.rating[data-select="5"] .off[data-point="3"], 
+.rating[data-select="5"] .off[data-point="4"], 
+.rating[data-select="5"] .off[data-point="5"], 
+.rating[data-select="6"] .off[data-point="1"], 
+.rating[data-select="6"] .off[data-point="2"], 
+.rating[data-select="6"] .off[data-point="3"], 
+.rating[data-select="6"] .off[data-point="4"], 
+.rating[data-select="6"] .off[data-point="5"], 
+.rating[data-select="6"] .off[data-point="6"], 
+.rating[data-select="7"] .off[data-point="1"], 
+.rating[data-select="7"] .off[data-point="2"], 
+.rating[data-select="7"] .off[data-point="3"], 
+.rating[data-select="7"] .off[data-point="4"], 
+.rating[data-select="7"] .off[data-point="5"], 
+.rating[data-select="7"] .off[data-point="6"], 
+.rating[data-select="7"] .off[data-point="7"], 
+.rating[data-select="8"] .off[data-point="1"], 
+.rating[data-select="8"] .off[data-point="2"], 
+.rating[data-select="8"] .off[data-point="3"], 
+.rating[data-select="8"] .off[data-point="4"], 
+.rating[data-select="8"] .off[data-point="5"], 
+.rating[data-select="8"] .off[data-point="6"], 
+.rating[data-select="8"] .off[data-point="7"], 
+.rating[data-select="8"] .off[data-point="8"], 
+.rating[data-select="9"] .off[data-point="1"], 
+.rating[data-select="9"] .off[data-point="2"], 
+.rating[data-select="9"] .off[data-point="3"], 
+.rating[data-select="9"] .off[data-point="4"], 
+.rating[data-select="9"] .off[data-point="5"], 
+.rating[data-select="9"] .off[data-point="6"], 
+.rating[data-select="9"] .off[data-point="7"], 
+.rating[data-select="9"] .off[data-point="8"], 
+.rating[data-select="9"] .off[data-point="9"], 
+.rating[data-select="10"] .off[data-point="1"], 
+.rating[data-select="10"] .off[data-point="2"], 
+.rating[data-select="10"] .off[data-point="3"], 
+.rating[data-select="10"] .off[data-point="4"], 
+.rating[data-select="10"] .off[data-point="5"], 
+.rating[data-select="10"] .off[data-point="6"], 
+.rating[data-select="10"] .off[data-point="7"], 
+.rating[data-select="10"] .off[data-point="8"], 
+.rating[data-select="10"] .off[data-point="9"], 
+.rating[data-select="10"] .off[data-point="10"] 
+{
+    
+    color: #FFA829;
+
+}
+
+.rating[data-select="1"] .on[data-point="2"], 
+.rating[data-select="1"] .on[data-point="3"], 
+.rating[data-select="1"] .on[data-point="4"], 
+.rating[data-select="1"] .on[data-point="5"], 
+.rating[data-select="1"] .on[data-point="6"], 
+.rating[data-select="1"] .on[data-point="7"], 
+.rating[data-select="1"] .on[data-point="8"], 
+.rating[data-select="1"] .on[data-point="9"], 
+.rating[data-select="1"] .on[data-point="10"], 
+.rating[data-select="2"] .on[data-point="3"], 
+.rating[data-select="2"] .on[data-point="4"], 
+.rating[data-select="2"] .on[data-point="5"], 
+.rating[data-select="2"] .on[data-point="6"], 
+.rating[data-select="2"] .on[data-point="7"], 
+.rating[data-select="2"] .on[data-point="8"], 
+.rating[data-select="2"] .on[data-point="9"], 
+.rating[data-select="2"] .on[data-point="10"], 
+.rating[data-select="3"] .on[data-point="4"], 
+.rating[data-select="3"] .on[data-point="5"], 
+.rating[data-select="3"] .on[data-point="6"], 
+.rating[data-select="3"] .on[data-point="7"], 
+.rating[data-select="3"] .on[data-point="8"],
+.rating[data-select="3"] .on[data-point="9"],
+.rating[data-select="3"] .on[data-point="10"], 
+.rating[data-select="4"] .on[data-point="5"], 
+.rating[data-select="4"] .on[data-point="6"], 
+.rating[data-select="4"] .on[data-point="7"], 
+.rating[data-select="4"] .on[data-point="8"],
+.rating[data-select="4"] .on[data-point="9"],
+.rating[data-select="4"] .on[data-point="10"], 
+.rating[data-select="5"] .on[data-point="6"], 
+.rating[data-select="5"] .on[data-point="7"], 
+.rating[data-select="5"] .on[data-point="8"],
+.rating[data-select="5"] .on[data-point="9"],
+.rating[data-select="5"] .on[data-point="10"], 
+.rating[data-select="6"] .on[data-point="7"], 
+.rating[data-select="6"] .on[data-point="8"],
+.rating[data-select="6"] .on[data-point="9"],
+.rating[data-select="6"] .on[data-point="10"], 
+.rating[data-select="7"] .on[data-point="8"],
+.rating[data-select="7"] .on[data-point="9"],
+.rating[data-select="7"] .on[data-point="10"], 
+.rating[data-select="8"] .on[data-point="9"],
+.rating[data-select="8"] .on[data-point="10"], 
+.rating[data-select="9"] .on[data-point="10"] 
+{
+    color: rgba(51, 51, 51, 0.7);
+}
+
+.rating[data-select="1"].rating[data-rating="1"] .on[data-point="1"]
+{
+
+    color: rgba(51, 51, 51, 0.7);
+
+}
+
+
+/* Универсальное */
+
+.user-avatar img {
+    display: inline-block ! important;
+}
+
+.loading {
+    display: none;
+}
