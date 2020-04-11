@@ -10,6 +10,7 @@ Author URI: https://vk.com/alexey_sergeev
 
 defined( 'ABSPATH' ) || exit;
 
+include_once dirname( __FILE__ ) . '/functions.php';
 include_once dirname( __FILE__ ) . '/inc/dg-init.php';
 include_once dirname( __FILE__ ) . '/inc/dg-templates.php';
 

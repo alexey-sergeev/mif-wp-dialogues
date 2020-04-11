@@ -181,7 +181,7 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
         $out .= '<div class="row">';
         $out .= '<div class="col pt-5 pb-5">';
 
-        if ( $this->access_level( $post_id ) > 2 ) $out .= '<a href="?id=' . $post_id . '&download=rating" class="big-button mr-3" title="Скачать"><i class="fa fa-download" aria-hidden="true"></i></a>';
+        if ( $this->access_level( $post_id ) > 2 ) $out .= '<a href="?id=' . $post_id . '&download=rating" class="big-button mr-3" id="download_rl" title="Скачать"><i class="fa fa-download" aria-hidden="true"></i></a>';
         $out .= '<a href="#" class="big-button mr-3" title="Обновить" id="refresh_rl" data-nonce="' . wp_create_nonce( 'mif-dg' ) . '" data-post="' . $post_id . '"><i class="fa fa-refresh" aria-hidden="true"></i></a>';
         $out .= '<span class="loading"><i class="fa fa fa-spinner fa-spin"></i></span>';
         

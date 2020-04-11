@@ -55,8 +55,6 @@ class mif_dg_rating_panel extends mif_dg_core {
         $data = $this->get_rating_data( $comment_id );
         // p($data);
         $rating = ( isset( $data['rating'] ) ) ? (int) $data['rating'] : 0;
-        // $master = ( isset( $data['user'] ) ) ? get_user_by( 'id', $data['user'] ) : 0; 
-        // $timestamp = ( isset( $data['timestamp'] ) && $data['timestamp'] ) ? date('d.m.Y г. в G:i', $data['timestamp'] + get_option( 'gmt_offset' ) * 3600 ) : '&mdash;';
         $timestamp = ( isset( $data['timestamp'] ) ) ? $this->get_time( $data['timestamp'] ) : $this->get_time();
         
         $nonce = wp_create_nonce( 'mif-dg' );

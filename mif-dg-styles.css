@@ -42,7 +42,7 @@
     
 }
 
-#refresh_rl, .nav-link, input[type="radio"] {
+#refresh_rl, #download_rl, .nav-link, input[type="radio"] {
     outline: none ! important;
 }
 

@@ -295,6 +295,8 @@ class mif_dg_core {
 
     public function set_param( $post_id = NULL )
     {
+        if ( ! function_exists( 'update_global_postmeta' ) ) return;
+
         global $post;
         if ( $post_id == NULL ) $post_id = $post->ID;
 
@@ -304,9 +306,13 @@ class mif_dg_core {
 
         $s = $this->get_settings( $post_id );
 
-        $key = $this->get_key( 'param', $post_id );
-        $ret = update_site_option( $key, array( 'max_rating' => $s['max_rating'], 'url' => get_permalink( $post_id ) ) );
-        
+        $ret = update_global_postmeta( 
+                        get_current_blog_id(),
+                        $post_id, 
+                        'mif_param', 
+                        array( 'max_rating' => $s['max_rating'], 'url' => get_permalink( $post_id ) ) 
+                    );
+                    
         return $ret;
     }
 
@@ -338,10 +344,10 @@ class mif_dg_core {
             if ( isset( $meta['members'] ) ) $arr['members'] = $meta['members'];
             if ( isset( $meta['masters'] ) ) $arr['masters'] = $meta['masters'];
 
-            $arr['members_arr'] = array_unique( array_merge( $this->get_user_arr( $arr['members'] ), $this->get_members( 'member', $post_id ) ) );
-
             $p = get_post( $post_id );
-            $arr['masters_arr'] = array_unique( array_merge( array( $p->post_author ), $this->get_user_arr( $arr['masters'] ), $this->get_members( 'members', $post_id ) ) );
+            $arr['masters_arr'] = array_unique( array_merge( array( $p->post_author ), $this->get_user_arr( $arr['masters'] ), $this->get_members( 'master', $post_id ) ) );
+            
+            $arr['members_arr'] = array_unique( array_diff( array_merge( $this->get_user_arr( $arr['members'] ), $this->get_members( 'member', $post_id ) ), $arr['masters_arr'] ) );
 
             wp_cache_set( 'dg_settings', $arr, $post_id );
 
@@ -355,16 +361,40 @@ class mif_dg_core {
     // Получить глобальных пользователей
     // 
 
-    public function get_members( $type = 'members', $post_id = NULL )
+    public function get_members( $type = 'member', $post_id = NULL )
     {
+        if ( ! function_exists( 'get_global_postmeta' ) ) return array();
+        
         global $post;
         if ( $post_id == NULL ) $post_id = $post->ID;
 
         $arr = array();
 
-        /// ???
-        /// ???
-        /// ???
+        $targets = get_global_postmeta( get_current_blog_id(), $post_id, 'mif_group' );
+
+        $map = array(
+                    'member' => array( 'student' ),
+                    'master' => array( 'expert', 'assistant', 'tutor', 'master' ),
+                    );
+
+        foreach ( $targets as $t ) {
+
+            $k = explode( ':', $t );
+            $k1 = absint( $k[0] );
+            $k2 = absint( $k[1] );
+
+            $key = 'mif_group_' . $k1 . '_' . $k2;
+
+            $data = get_users_by_metakey( $key );
+
+            foreach ( $data as $user_id => $user_data ) {
+
+                $p = explode( ':', $user_data );
+                if ( in_array( $p[1], $map[$type] ) ) $arr[] = $user_id;
+
+            }
+
+        }
 
         return $arr;
     }
@@ -494,7 +524,7 @@ class mif_dg_core {
         if ( $post_id == NULL ) $post_id = $post->ID;
 
         $site_id = get_current_blog_id();
-        $key = 'mif_' . $site_id . '_' . $post_id . '_' . $token;
+        $key = 'mif_' . $token . '_' . $site_id . '_' . $post_id;
 
         return $key;
     }
