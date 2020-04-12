@@ -24,6 +24,7 @@ class mif_dg_init extends mif_dg_control_panel {
         add_filter( 'comment_text', array( $this, 'add_rating_panel' ), 2, 2 );
 
         add_action( 'wp_insert_post', array( $this, 'update_settings' ), 10, 3 );
+
         // add_action( 'save_post', array( $this, 'update_settings' ), 10, 3 );
 
         add_action( 'wp_ajax_mark', array( $this, 'ajax_submit' ) );

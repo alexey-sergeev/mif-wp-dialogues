@@ -58,11 +58,27 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
 
         $out .= '<div class="container mt-5">';
 
-        $out .= '<div class="row"><div class="col">Максимальный балл: <span class="caption">' . $s['max_rating'] . '</span></div></div>';
-        $out .= '<div class="row mt-3"><div class="col">Подсчет баллов: <span class="caption">' . $this->method_caption( $s['method'] ) . '</span></div></div>';
-        $out .= '<div class="row mt-3"><div class="col">Подписчики:</div></div>';
+        // if ( $this->access_level( $post_id ) > 2 ) {
 
-        $out .= '<div class="row mt-3"><div class="col">';
+        //     $out .= '<div class="row mb-3"><div class="col">Код для интеграции: ';
+        //     $out .= '<span class="caption">g:' . get_current_blog_id() . ':' . $post_id . '</span>';
+        //     $out .= '</div></div>';
+
+        // }
+
+        $out .= '<div class="row mb-3">';
+        $out .= '<div class="col col-6">Максимальный балл: <span class="caption">' . $s['max_rating'] . '</span></div>';
+        
+        
+        $out .= '</div>';
+        
+        
+        
+        
+        $out .= '<div class="row mb-3"><div class="col">Подсчет баллов: <span class="caption">' . $this->method_caption( $s['method'] ) . '</span></div></div>';
+        $out .= '<div class="row mb-3"><div class="col">Подписчики:</div></div>';
+        
+        $out .= '<div class="row mb-3"><div class="col">';
         
         if ( ! empty( $s['members_arr'] ) ) {
             
@@ -74,19 +90,24 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
         }
         
         $out .= '</div></div>';
-
-        $out .= '<div class="row mt-3"><div class="col">Преподаватели: </div></div>';
-        $out .= '<div class="row mt-3"><div class="col">';
-
+        
+        $out .= '<div class="row mb-3"><div class="col">Преподаватели: </div></div>';
+        $out .= '<div class="row mb-3"><div class="col">';
+        
         foreach ( $s['masters_arr'] as $m ) $out .= '<span class="mr-2">' . $this->get_avatar( $m, 30 ) . '</span>';
-
+        
         $out .= '</div></div>';
-
+        
         if ( $this->access_level( $post_id ) > 2 ) {
-
-            $out .= '<div class="row mt-5"><div class="col"><a href="" id="settings_edit" data-nonce="' . wp_create_nonce( 'mif-dg' ) . '" data-post="' . $post_id . '">Изменить</a>';
+            
+            $out .= '<div class="row mt-5"><div class="col col-6"><a href="" id="settings_edit" data-nonce="' . wp_create_nonce( 'mif-dg' ) . '" data-post="' . $post_id . '">Изменить</a>';
             $out .= '<span class="loading ml-3"><i class="fa fa fa-spinner fa-spin"></i></span>';
-            $out .= '</div></div>';
+            $out .= '</div>';
+            
+            $out .= '<div class="col col-6 text-right"><span title="Код для интеграции">e:' . get_current_blog_id() . ':' . $post_id . '</span></div>';
+            
+            $out .= '</div>';
+    
 
         }
 

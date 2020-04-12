@@ -203,9 +203,12 @@ class mif_dg_core {
 
         $key = $this->get_key( 'rating', $post_id );
         
+        $status = ( $rating == 0 ) ? 'rework' : 'success';
+
         $rating_data = array(
             'rating' => $rating,
-            'user' => wp_get_current_user()->ID,
+            'status' => $status,
+            'master' => wp_get_current_user()->ID,
             'timestamp' => time(),
             'url' => get_permalink( $post_id )
         );
@@ -310,7 +313,7 @@ class mif_dg_core {
                         get_current_blog_id(),
                         $post_id, 
                         'mif_param', 
-                        array( 'max_rating' => $s['max_rating'], 'url' => get_permalink( $post_id ) ) 
+                        array( 'rating_max' => $s['max_rating'], 'url' => get_permalink( $post_id ) ) 
                     );
                     
         return $ret;
@@ -345,9 +348,18 @@ class mif_dg_core {
             if ( isset( $meta['masters'] ) ) $arr['masters'] = $meta['masters'];
 
             $p = get_post( $post_id );
-            $arr['masters_arr'] = array_unique( array_merge( array( $p->post_author ), $this->get_user_arr( $arr['masters'] ), $this->get_members( 'master', $post_id ) ) );
-            
-            $arr['members_arr'] = array_unique( array_diff( array_merge( $this->get_user_arr( $arr['members'] ), $this->get_members( 'member', $post_id ) ), $arr['masters_arr'] ) );
+
+            $arr['members_arr'] = $this->get_user_arr( $arr['members'] );
+            $arr['masters_arr'] = array_unique( array_merge( array( $p->post_author ), $this->get_user_arr( $arr['masters'] ) ) );
+
+            $global_members = $this->get_global_members( 'member', $post_id, $arr['masters_arr'] );
+            $global_masters = $this->get_global_members( 'master', $post_id, $arr['masters_arr'] );
+
+            $arr['members_arr'] = array_unique( array_merge( $arr['members_arr'], $global_members ) );
+            $arr['masters_arr'] = array_unique( array_merge( $arr['masters_arr'], $global_masters ) );
+
+            // $arr['masters_arr'] = array_unique( array_merge( array( $p->post_author ), $this->get_user_arr( $arr['masters'] ), $this->get_global_members( 'master', $post_id ) ) );
+            // $arr['members_arr'] = array_unique( array_diff( array_merge( $this->get_user_arr( $arr['members'] ), $this->get_global_members( 'member', $post_id ) ), $arr['masters_arr'] ) );
 
             wp_cache_set( 'dg_settings', $arr, $post_id );
 
@@ -361,7 +373,7 @@ class mif_dg_core {
     // Получить глобальных пользователей
     // 
 
-    public function get_members( $type = 'member', $post_id = NULL )
+    public function get_global_members( $type = 'member', $post_id = NULL, $masters )
     {
         if ( ! function_exists( 'get_global_postmeta' ) ) return array();
         
@@ -382,6 +394,11 @@ class mif_dg_core {
             $k = explode( ':', $t );
             $k1 = absint( $k[0] );
             $k2 = absint( $k[1] );
+            $k3 = absint( $k[2] );
+
+            // Не учитывать данные, если их добавил не master текущей старницы
+
+            if ( ! in_array( $k3, $masters ) ) continue;
 
             $key = 'mif_group_' . $k1 . '_' . $k2;
 

@@ -95,12 +95,8 @@ class mif_dg_rating_panel extends mif_dg_core {
 
                 }
 
-
-
-
             }
             
-
             $panel .= '</span>';
 
             if ( isset( $data['user'] ) ) {
