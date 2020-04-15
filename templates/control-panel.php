@@ -2,10 +2,10 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link result_list_tab active" href="#"><span class="count"><?php mif_dg_the_result_count() ?></span> Результаты</a>
+            <a class="nav-link settings_tab active" href="#">Оценка</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link settings_tab" href="#">Настройки</a>
+            <a class="nav-link result_list_tab" href="#"><span class="count"><?php mif_dg_the_result_count() ?></span> Результаты</a>
         </li>
     </ul>
 
