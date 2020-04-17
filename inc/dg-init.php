@@ -69,7 +69,10 @@ class mif_dg_init extends mif_dg_control_panel {
 
         } elseif ( $_REQUEST['action'] == 'refresh_rl' ) {
 
-            echo $this->get_result_list( $post_id );
+            $result = $this->get_result_list( $post_id );
+            $count = $this->get_result_count( $post_id );
+
+            echo json_encode( array( 'result' => $result, 'count' => $count ) );
 
         } elseif ( $_REQUEST['action'] == 'settings_edit' ) {
 

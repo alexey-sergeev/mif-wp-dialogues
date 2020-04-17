@@ -110,7 +110,7 @@ class mif_dg_rating_panel extends mif_dg_core {
             } else {
 
                 $panel .= '<span class="comment">';
-                $panel .= '<span class="timestamp norating">Ожидает проверки</span>'; 
+                $panel .= '<span class="timestamp norating">Ожидает оценки</span>'; 
                 $panel .= '</span>';
 
             }

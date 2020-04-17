@@ -125,7 +125,8 @@ jQuery( document ).ready( function( jq ) {
         var nonce = jq( this ).attr( 'data-nonce' );
         var post = jq( this ).attr( 'data-post' );
         // var container = jq( this ).parent().parent().parent().parent();
-        var container = jq( this ).closest( '.container' ).parent();
+        var container_result = jq( this ).closest( '.container' ).parent();
+        var container_count = jq( this ).closest( '.control-panel' ).find( '.count' ).parent();
         
         // jq( this ).find( 'i' ).addClass( 'fa-spin' );
         show_loading( this );
@@ -139,8 +140,11 @@ jQuery( document ).ready( function( jq ) {
 
             if ( response ) {
 
-                container.html( response );
-                // console.log(response);
+                var data = jQuery.parseJSON( response );
+
+                container_result.html( data['result'] );
+                container_count.html( data['count'] );
+                // console.log(data);
 
             }
 

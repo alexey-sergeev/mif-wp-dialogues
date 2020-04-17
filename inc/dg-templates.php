@@ -40,7 +40,7 @@ function mif_dg_the_settings_tab()
 function mif_dg_the_result_count()
 {
     global $mif_dg;
-    echo $mif_dg->get_result_count();
+    echo '<span>' . $mif_dg->get_result_count() . '</span>';
 }
 
 

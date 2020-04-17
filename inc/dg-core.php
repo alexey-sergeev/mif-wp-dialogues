@@ -121,7 +121,7 @@ class mif_dg_core {
             $rating = ( isset( $data['rating'] ) ) ? (int) $data['rating'] : 0;
             $marked = ( isset( $data['rating'] ) ) ? true: false;
 
-            if ( $user ) $arr[] = array( 'user' => $user, 'rating' => $rating, 'comment' => $c->comment_ID, 'marked' => $marked );
+            if ( $user ) $arr[] = array( 'user' => $user, 'rating' => $rating, 'comment' => $c->comment_ID, 'marked' => $marked, 'approved' => $c->comment_approved );
 
         }
 
@@ -135,7 +135,7 @@ class mif_dg_core {
 
             $user = $item['user'];
 
-            if ( ! isset( $index[$user] ) ) $index[$user] = array( 'rating' => 0, 'comments' => array(), 'unmarked' => array() );
+            if ( ! isset( $index[$user] ) ) $index[$user] = array( 'rating' => 0, 'comments' => array(), 'unmarked' => array(), 'unapproved' => array() );
 
             // Здесь проверка способа вычисления оценки.
             
@@ -151,6 +151,7 @@ class mif_dg_core {
 
             $index[$user]['comments'][] = $item['comment'];
             if ( ! $item['marked'] ) $index[$user]['unmarked'][] = $item['comment'];
+            if ( ! $item['approved'] ) $index[$user]['unapproved'][] = $item['comment'];
 
         }
 
@@ -175,6 +176,7 @@ class mif_dg_core {
                 'timestamp' => $rating_data['timestamp'],
                 'comments' => $data['comments'],
                 'unmarked' => $data['unmarked'],
+                'unapproved' => $data['unapproved'],
             );
         }
 

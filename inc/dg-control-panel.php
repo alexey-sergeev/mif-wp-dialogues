@@ -209,8 +209,6 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
         $out .= '</div>';
         $out .= '</div>';
 
-
-
         foreach ( $result as $item ) {
 
             $out .= '<div class="row">';
@@ -227,8 +225,35 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
 
             foreach ( $item['comments'] as $c ) {
 
-                $color = ( in_array( $c, $item['unmarked'] ) ) ? 'text-danger' : 'text-success';
-                $out .= '<a href="' . get_comment_link( $c ) . '" class="' . $color . ' mr-2"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+                $color = 'text-success';
+                $link = get_comment_link( $c );
+                $title = '';
+                
+                if ( in_array( $c, $item['unmarked'] ) ) {
+                    
+                    $color = 'text-warning';
+                    $title = ' title="Ожидает оценки"';
+                    
+                }
+                
+                if ( in_array( $c, $item['unapproved'] ) ) {
+                    
+                    $color = 'text-danger';
+                    $link = get_edit_post_link( $post_id );
+                    if ( $link ) $link .= '#commentsdiv';
+                    $title = ' title="Ожидает проверки и одобрения"';
+
+                }
+
+                if ( $link ) {
+
+                    $out .= '<a href="' . $link . '" class="' . $color . ' mr-2"' . $title . '><i class="fa fa-comment" aria-hidden="true"></i></a>';
+                    
+                } else {
+                    
+                    $out .= '<span class="' . $color . ' mr-2"' . $title . '><i class="fa fa-comment" aria-hidden="true"></i></span>';
+
+                }
                 // $out .= $c;
 
             }
@@ -262,7 +287,24 @@ class mif_dg_control_panel extends mif_dg_rating_panel {
         if ( $post_id == NULL ) $post_id = $post->ID;
 
         $result = $this->get_result( $post_id );
-        return count( $result );
+
+        $arr = array();
+
+        foreach ( $result as $r ) if ( count( $r['unmarked'] ) || count( $r['unapproved'] ) ) $arr[] = true;
+
+        $count = count( $arr );
+        $class = 'bg-warning';
+
+        if ( $count == 0 ) {
+            
+            $count = count( $result );
+            $class = 'bg-success';
+
+        }
+
+        $out = '<span class="count ' . $class . '">' . $count . '</span>';
+
+        return $out;
     }
 
 
