@@ -137,7 +137,7 @@ class mif_dg_core {
 
             if ( ! isset( $index[$user] ) ) $index[$user] = array( 'rating' => 0, 'comments' => array(), 'unmarked' => array(), 'unapproved' => array() );
 
-            // Здесь проверка способа вычисления оценки.
+            // $marked = false;
             
             if ( $method == 'better' ) {
                 
@@ -163,7 +163,7 @@ class mif_dg_core {
 
             // $u = get_userdata( $user_id );
 
-            $rating_data = $this->update_user_rating( $user_id, $data['rating'], $post_id );
+            $rating_data = $this->update_user_rating( $user_id, $data, $post_id );
 
             $result[$user_id] = array(
                 'user_id' => $user_id,
@@ -191,21 +191,23 @@ class mif_dg_core {
     // Сохраняет глобальный рейтинг пользователя
     // 
 
-    public function update_user_rating( $user_id, $rating, $post_id = NULL )
+    public function update_user_rating( $user_id, $data, $post_id = NULL )
     {
         global $post;
         if ( $post_id == NULL ) $post_id = $post->ID;
 
-        $rating_data = $this->get_user_rating( $user_id, $post_id );
+        $old_data = $this->get_user_rating( $user_id, $post_id );
 
-        if ( isset( $rating_data['rating'] ) && $rating_data['rating'] == $rating ) return $rating_data;
+        $status = 'success';
+        if ( $data['rating'] == 0 && count( $data['unmarked'] ) == 0 ) $status = 'rework';
+        if ( $data['rating'] == 0 && count( $data['unmarked'] ) > 0 ) $status = 'waiting';
 
-        // $site_id = get_current_blog_id();
-        // $key = 'mif_rating_' . $site_id . '_' . $post_id;
+        if (    isset( $old_data['rating'] ) && isset( $old_data['status'] ) && 
+                $old_data['rating'] == $data['rating'] && $old_data['status'] == $status ) return $old_data;
 
         $key = $this->get_key( 'rating', $post_id );
         
-        $status = ( $rating == 0 ) ? 'rework' : 'success';
+        // $status = ( $rating == 0 ) ? 'rework' : 'success';
 
         $rating_data = array(
             'rating' => $rating,
