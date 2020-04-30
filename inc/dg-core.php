@@ -210,7 +210,7 @@ class mif_dg_core {
         // $status = ( $rating == 0 ) ? 'rework' : 'success';
 
         $rating_data = array(
-            'rating' => $rating,
+            'rating' => $data['rating'],
             'status' => $status,
             'master' => wp_get_current_user()->ID,
             'timestamp' => time(),
