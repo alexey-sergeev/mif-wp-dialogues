@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: MIF WP Dialogues
-Plugin URI: http://edu.vspu.ru
+Plugin URI: https://github.com/alexey-sergeev/mif-wp-dialogues
 Description: Плагин для сайта учебных диалогов.
 Author: Алексей Н. Сергеев
-Version: 0.9
+Version: 1.0.3
 Author URI: https://vk.com/alexey_sergeev
 */
 

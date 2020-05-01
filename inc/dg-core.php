@@ -317,7 +317,10 @@ class mif_dg_core {
                         get_current_blog_id(),
                         $post_id, 
                         'mif_param', 
-                        array( 'rating_max' => $s['max_rating'], 'url' => get_permalink( $post_id ), 'name' => get_the_title( $post_id ) ) 
+                        array( 'rating_max' => $s['max_rating'], 
+                                'url' => get_permalink( $post_id ), 
+                                'name' => get_the_title( $post_id ), 
+                                'excerpt' => wp_trim_words( $p->post_content, 20, '...' ) ) 
                     );
                     
         return $ret;
