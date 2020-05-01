@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 
 
-if ( ! function_exists( 'get_user_by_metakey' ) ) {
+if ( ! function_exists( 'get_users_by_metakey' ) ) {
 
     // 
     // Возвращает массив пользователей, для которых устанволен указанный meta_key
